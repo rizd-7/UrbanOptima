@@ -1,0 +1,105 @@
+{
+  "metadata": {
+    "location": "Casbah, Algiers, Algeria",
+    "timestamp": "2026-01-25 04:11:21",
+    "n_recommendations": 3
+  },
+  "recommendations": [
+    {
+      "site_id": 1,
+      "node_id": 11929391212,
+      "coords": [
+        36.7829214,
+        3.0536061
+      ],
+      "facility_type": "Regional Hospital",
+      "composite_score": 0.6881153172053074,
+      "accessibility_score": 0.8386384130377081,
+      "density_score": 0.23035713181151943,
+      "terrain_score": 1.0,
+      "centrality_score": 0.6,
+      "equity_score": 0.9700258968922969,
+      "catchment_demand_sqm": 347885,
+      "population_proxy": 13915,
+      "nearest_competitor_m": 491.5235644451918,
+      "street_name": "Unnamed Street",
+      "slope_pct": 0.0,
+      "primary_rationale": "Fills a critical service gap in an underserved neighborhood",
+      "risk_factors": [
+        "No significant implementation risks identified."
+      ],
+      "confidence": "MEDIUM",
+      "phase": "Pending",
+      "phase_id": 0,
+      "roi_pct": 0.0,
+      "npv_20yr": 0.0,
+      "estimated_cost_usd": 0.0,
+      "priority_score": 0.0,
+      "action_plan": ""
+    },
+    {
+      "site_id": 2,
+      "node_id": 11938375777,
+      "coords": [
+        36.7870231,
+        3.0557345
+      ],
+      "facility_type": "Regional Hospital",
+      "composite_score": 0.6931885119991281,
+      "accessibility_score": 0.9196662023200031,
+      "density_score": 0.3386608962414015,
+      "terrain_score": 0.828694437424902,
+      "centrality_score": 0.6,
+      "equity_score": 0.723359515130414,
+      "catchment_demand_sqm": 356014,
+      "population_proxy": 14240,
+      "nearest_competitor_m": 300.8213826093822,
+      "street_name": "Rue Rachid Khelfellah",
+      "slope_pct": 2.56958343862647,
+      "primary_rationale": "Addresses lowest healthcare access in the area | Improves equity for underserved populations",
+      "risk_factors": [
+        "No significant implementation risks identified."
+      ],
+      "confidence": "MEDIUM",
+      "phase": "Pending",
+      "phase_id": 0,
+      "roi_pct": 0.0,
+      "npv_20yr": 0.0,
+      "estimated_cost_usd": 0.0,
+      "priority_score": 0.0,
+      "action_plan": ""
+    },
+    {
+      "site_id": 3,
+      "node_id": 11984984051,
+      "coords": [
+        36.7818614,
+        3.0593037
+      ],
+      "facility_type": "Regional Hospital",
+      "composite_score": 0.537185811382627,
+      "accessibility_score": 0.1194180326682556,
+      "density_score": 0.8082564125964191,
+      "terrain_score": 1.0,
+      "centrality_score": 0.6,
+      "equity_score": 0.5332539679963281,
+      "catchment_demand_sqm": 555355,
+      "population_proxy": 22214,
+      "nearest_competitor_m": 116.9198450333973,
+      "street_name": "Unnamed Street",
+      "slope_pct": 0.0,
+      "primary_rationale": "Serves the highest population concentration",
+      "risk_factors": [
+        "Competitor within 116m poses market saturation risk."
+      ],
+      "confidence": "MEDIUM",
+      "phase": "Pending",
+      "phase_id": 0,
+      "roi_pct": 0.0,
+      "npv_20yr": 0.0,
+      "estimated_cost_usd": 0.0,
+      "priority_score": 0.0,
+      "action_plan": ""
+    }
+  ]
+}

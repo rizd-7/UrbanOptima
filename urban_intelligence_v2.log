@@ -1,0 +1,217 @@
+2026-01-25 04:10:28,709 | INFO     | Starting Urban Intelligence System v2.0
+2026-01-25 04:10:28,709 | INFO     | ================================================================================
+2026-01-25 04:10:28,709 | INFO     | PHASE 1: DATA ACQUISITION & VALIDATION
+2026-01-25 04:10:28,709 | INFO     | ================================================================================
+2026-01-25 04:10:28,709 | INFO     | Downloading pedestrian network: Casbah, Algiers, Algeria
+2026-01-25 04:10:29,709 | INFO     |    Network: 1141 nodes, 3310 edges
+2026-01-25 04:10:29,709 | INFO     | Downloading building footprints...
+2026-01-25 04:10:29,953 | INFO     |    Buildings: 2251 valid polygons
+2026-01-25 04:10:29,953 | INFO     | Downloading healthcare facilities...
+2026-01-25 04:10:30,256 | INFO     |    Existing facilities: 13
+2026-01-25 04:10:30,256 | INFO     | Querying DEM (Open-Elevation API)...
+2026-01-25 04:10:48,228 | INFO     |    Elevation data: 1141/1141 nodes
+2026-01-25 04:10:48,228 | INFO     | ================================================================================
+2026-01-25 04:10:48,228 | INFO     | PHASE 1.5: DEMOGRAPHIC ENRICHMENT
+2026-01-25 04:10:48,228 | INFO     | ================================================================================
+2026-01-25 04:10:48,228 | INFO     |   Attempting to fetch WorldPop real-time data...
+2026-01-25 04:10:48,228 | WARNING  |    WorldPop API unavailable/unauthenticated. Switching to fallback.
+2026-01-25 04:10:48,228 | INFO     |   Calculating Building Morphology Proxy...
+2026-01-25 04:10:48,256 | INFO     |    Morphology model applied (Rules: 25m²/person, Type-based heights)
+2026-01-25 04:10:48,256 | INFO     |    Total Estimated Population: 57,280
+2026-01-25 04:10:48,256 | INFO     |    Avg Persons per Building:   25.4
+2026-01-25 04:10:48,259 | INFO     | ================================================================================
+2026-01-25 04:10:48,259 | INFO     | PHASE 2: PHYSICS-BASED IMPEDANCE MODELING
+2026-01-25 04:10:48,259 | INFO     | ================================================================================
+2026-01-25 04:10:48,284 | INFO     |    Physics model applied | Avg walking speed: 4.59 km/h
+2026-01-25 04:10:48,293 | INFO     | ================================================================================
+2026-01-25 04:10:48,293 | INFO     | PHASE 3: MULTI-CRITERIA SPATIAL ANALYSIS
+2026-01-25 04:10:48,293 | INFO     | ================================================================================
+2026-01-25 04:10:48,293 | INFO     |   [1/5] Computing accessibility gaps (2SFCA inversion)...
+2026-01-25 04:11:17,936 | INFO     |   [2/5] Computing population density proxies...
+2026-01-25 04:11:18,032 | INFO     |   [3/5] Evaluating terrain suitability...
+2026-01-25 04:11:18,044 | INFO     |   [4/5] Computing network centrality...
+2026-01-25 04:11:18,046 | INFO     |   [5/5] Assessing spatial equity distribution...
+2026-01-25 04:11:18,064 | INFO     |   Computing weighted composite scores...
+2026-01-25 04:11:18,064 | INFO     | 
+  Criteria Score Statistics:
+2026-01-25 04:11:18,064 | INFO     |     accessibility_gap         | Mean: 0.200 | Std: 0.212
+2026-01-25 04:11:18,064 | INFO     |     population_density        | Mean: 0.596 | Std: 0.221
+2026-01-25 04:11:18,064 | INFO     |     terrain_suitability       | Mean: 0.757 | Std: 0.396
+2026-01-25 04:11:18,064 | INFO     |     network_centrality        | Mean: 0.580 | Std: 0.173
+2026-01-25 04:11:18,064 | INFO     |     spatial_equity            | Mean: 0.571 | Std: 0.098
+2026-01-25 04:11:18,106 | INFO     |   Extracting topological features...
+2026-01-25 04:11:18,129 | INFO     | ================================================================================
+2026-01-25 04:11:18,129 | INFO     | PHASE 4: MACHINE LEARNING (EXPLAINABLE)
+2026-01-25 04:11:18,129 | INFO     | ================================================================================
+2026-01-25 04:11:18,129 | INFO     |   Training stacking ensemble (5-fold CV)...
+2026-01-25 04:11:20,350 | INFO     |    Training R²: 0.9097
+2026-01-25 04:11:20,350 | INFO     |    Testing R²:  0.8293
+2026-01-25 04:11:20,350 | INFO     |    MAE:         0.0252
+2026-01-25 04:11:20,350 | INFO     |   Computing permutation feature importance...
+2026-01-25 04:11:21,066 | INFO     | 
+  Top 3 Most Important Features:
+2026-01-25 04:11:21,066 | INFO     |     elevation            | 1.1125
+2026-01-25 04:11:21,066 | INFO     |     max_slope            | 0.3290
+2026-01-25 04:11:21,068 | INFO     |     avg_slope            | 0.3287
+2026-01-25 04:11:21,068 | INFO     | ================================================================================
+2026-01-25 04:11:21,068 | INFO     | PHASE 5: OPTIMIZATION WITH ZONING CONSTRAINTS
+2026-01-25 04:11:21,068 | INFO     | ================================================================================
+2026-01-25 04:11:21,080 | INFO     |    Valid candidates: 799 / 1141 (70.0%)
+2026-01-25 04:11:21,080 | INFO     |   Initializing Particle Swarm Optimization...
+2026-01-25 04:11:21,082 | INFO     |     Iteration   0 | Best Score: 1.7102
+2026-01-25 04:11:21,086 | INFO     |     Iteration   5 | Best Score: 1.7315
+2026-01-25 04:11:21,090 | INFO     |     Iteration  10 | Best Score: 1.7758
+2026-01-25 04:11:21,096 | INFO     |     Iteration  15 | Best Score: 1.7758
+2026-01-25 04:11:21,100 | INFO     |     Iteration  20 | Best Score: 1.8336
+2026-01-25 04:11:21,104 | INFO     |    Optimization complete | Final Score: 1.9185
+2026-01-25 04:11:21,104 | INFO     | ================================================================================
+2026-01-25 04:11:21,106 | INFO     | PHASE 6: DECISION SUPPORT & JUSTIFICATION
+2026-01-25 04:11:21,106 | INFO     | ================================================================================
+2026-01-25 04:11:21,120 | INFO     | 
+Recommendations exported to urban_output\recommendations.json
+2026-01-25 04:11:21,122 | INFO     | ================================================================================
+2026-01-25 04:11:21,122 | INFO     | PHASE 7: TIMELINE & PHASING STRATEGY
+2026-01-25 04:11:21,122 | INFO     | ================================================================================
+2026-01-25 04:11:21,416 | INFO     |    Timeline visualization saved: urban_output\implementation_timeline.png
+2026-01-25 04:11:21,416 | INFO     | 
+  Phasing Strategy Summary:
+2026-01-25 04:11:21,416 | INFO     |     PHASE                | SITE       | TYPE                 | ROI      | ACTION
+2026-01-25 04:11:21,416 | INFO     | ------------------------------------------------------------------------------------------
+2026-01-25 04:11:21,416 | INFO     |     Phase 1 (Year 1)     | #3         | Regional Hospital    |  419%   | Immediate Land Acquisition & Design
+2026-01-25 04:11:21,416 | INFO     |     Phase 2 (Years 2-3)  | #2         | Regional Hospital    |  230%   | Secure Funding & Environmental Permitting
+2026-01-25 04:11:21,416 | INFO     |     Phase 3 (Years 4-5)  | #1         | Regional Hospital    |  225%   | Reserve Land for Future Expansion
+2026-01-25 04:11:21,416 | INFO     | ================================================================================
+2026-01-25 04:11:21,416 | INFO     | PHASE 7: ADVANCED VISUALIZATION
+2026-01-25 04:11:21,416 | INFO     | ================================================================================
+2026-01-25 04:11:21,416 | INFO     |   Creating interactive map...
+2026-01-25 04:11:21,433 | INFO     |      Map: urban_output\interactive_map.html
+2026-01-25 04:11:21,433 | INFO     |   Creating decision matrix...
+2026-01-25 04:11:22,026 | INFO     |      Matrix: urban_output\decision_matrix.png
+2026-01-25 04:11:22,026 | INFO     |   Creating criteria heatmaps...
+2026-01-25 04:11:22,966 | INFO     |      Distributions: urban_output\criteria_distributions.png
+2026-01-25 04:11:22,966 | INFO     |    All visualizations saved to urban_output/
+2026-01-25 04:11:22,966 | INFO     | Starting Scientific Validation Suite
+2026-01-25 04:11:22,976 | INFO     | ================================================================================
+2026-01-25 04:11:22,976 | INFO     | PHASE 3: MULTI-CRITERIA SPATIAL ANALYSIS
+2026-01-25 04:11:22,976 | INFO     | ================================================================================
+2026-01-25 04:11:22,976 | INFO     |   [1/5] Computing accessibility gaps (2SFCA inversion)...
+2026-01-25 04:11:53,561 | INFO     |   [2/5] Computing population density proxies...
+2026-01-25 04:11:53,646 | INFO     |   [3/5] Evaluating terrain suitability...
+2026-01-25 04:11:53,657 | INFO     |   [4/5] Computing network centrality...
+2026-01-25 04:11:53,657 | INFO     |   [5/5] Assessing spatial equity distribution...
+2026-01-25 04:11:53,676 | INFO     |   Computing weighted composite scores...
+2026-01-25 04:11:53,676 | INFO     | 
+  Criteria Score Statistics:
+2026-01-25 04:11:53,676 | INFO     |     accessibility_gap         | Mean: 0.200 | Std: 0.212
+2026-01-25 04:11:53,676 | INFO     |     population_density        | Mean: 0.596 | Std: 0.221
+2026-01-25 04:11:53,676 | INFO     |     terrain_suitability       | Mean: 0.757 | Std: 0.396
+2026-01-25 04:11:53,676 | INFO     |     network_centrality        | Mean: 0.580 | Std: 0.173
+2026-01-25 04:11:53,676 | INFO     |     spatial_equity            | Mean: 0.571 | Std: 0.098
+2026-01-25 04:11:53,676 | INFO     | ================================================================================
+2026-01-25 04:11:53,676 | INFO     | PHASE 8: ABLATION STUDY & VALIDATION
+2026-01-25 04:11:53,676 | INFO     | ================================================================================
+2026-01-25 04:11:53,676 | INFO     |   Testing Scenario: Random Baseline...
+2026-01-25 04:11:53,676 | INFO     |   Testing Scenario: No Spatial Constraints...
+2026-01-25 04:11:53,676 | INFO     | ================================================================================
+2026-01-25 04:11:53,676 | INFO     | PHASE 5: OPTIMIZATION WITH ZONING CONSTRAINTS
+2026-01-25 04:11:53,676 | INFO     | ================================================================================
+2026-01-25 04:11:53,686 | INFO     |    Valid candidates: 799 / 1141 (70.0%)
+2026-01-25 04:11:53,686 | INFO     |   Initializing Particle Swarm Optimization...
+2026-01-25 04:11:53,686 | INFO     |     Iteration   0 | Best Score: 2.3547
+2026-01-25 04:11:53,690 | INFO     |     Iteration   5 | Best Score: 2.4545
+2026-01-25 04:11:53,690 | INFO     |     Iteration  10 | Best Score: 2.4545
+2026-01-25 04:11:53,696 | INFO     |     Iteration  15 | Best Score: 2.4916
+2026-01-25 04:11:53,696 | INFO     |     Iteration  20 | Best Score: 2.5309
+2026-01-25 04:11:53,696 | INFO     |    Optimization complete | Final Score: 2.5309
+2026-01-25 04:11:53,696 | INFO     |   Testing Scenario: No 2SFCA (Accessibility)...
+2026-01-25 04:11:53,701 | INFO     | ================================================================================
+2026-01-25 04:11:53,701 | INFO     | PHASE 5: OPTIMIZATION WITH ZONING CONSTRAINTS
+2026-01-25 04:11:53,701 | INFO     | ================================================================================
+2026-01-25 04:11:53,706 | INFO     |    Valid candidates: 583 / 1141 (51.1%)
+2026-01-25 04:11:53,706 | INFO     |   Initializing Particle Swarm Optimization...
+2026-01-25 04:11:53,711 | INFO     |     Iteration   0 | Best Score: 1.0806
+2026-01-25 04:11:53,711 | INFO     |     Iteration   5 | Best Score: 1.4029
+2026-01-25 04:11:53,716 | INFO     |     Iteration  10 | Best Score: 1.4029
+2026-01-25 04:11:53,716 | INFO     |     Iteration  15 | Best Score: 1.4029
+2026-01-25 04:11:53,721 | INFO     |     Iteration  20 | Best Score: 1.4029
+2026-01-25 04:11:53,721 | INFO     |    Optimization complete | Final Score: 1.4039
+2026-01-25 04:11:53,721 | INFO     |   Testing Scenario: No Physics (Flat Earth)...
+2026-01-25 04:11:53,721 | INFO     | ================================================================================
+2026-01-25 04:11:53,721 | INFO     | PHASE 5: OPTIMIZATION WITH ZONING CONSTRAINTS
+2026-01-25 04:11:53,721 | INFO     | ================================================================================
+2026-01-25 04:11:53,731 | INFO     |    Valid candidates: 225 / 1141 (19.7%)
+2026-01-25 04:11:53,731 | INFO     |   Initializing Particle Swarm Optimization...
+2026-01-25 04:11:53,731 | INFO     |     Iteration   0 | Best Score: 1.1114
+2026-01-25 04:11:53,736 | INFO     |     Iteration   5 | Best Score: 1.5216
+2026-01-25 04:11:53,737 | INFO     |     Iteration  10 | Best Score: 1.5216
+2026-01-25 04:11:53,737 | INFO     |     Iteration  15 | Best Score: 1.5261
+2026-01-25 04:11:53,743 | INFO     |     Iteration  20 | Best Score: 1.5261
+2026-01-25 04:11:53,743 | INFO     |    Optimization complete | Final Score: 1.5729
+2026-01-25 04:11:53,743 | INFO     |   Testing Scenario: Full Integrated System...
+2026-01-25 04:11:53,746 | INFO     | ================================================================================
+2026-01-25 04:11:53,746 | INFO     | PHASE 5: OPTIMIZATION WITH ZONING CONSTRAINTS
+2026-01-25 04:11:53,746 | INFO     | ================================================================================
+2026-01-25 04:11:53,754 | INFO     |    Valid candidates: 799 / 1141 (70.0%)
+2026-01-25 04:11:53,754 | INFO     |   Initializing Particle Swarm Optimization...
+2026-01-25 04:11:53,754 | INFO     |     Iteration   0 | Best Score: 1.5134
+2026-01-25 04:11:53,756 | INFO     |     Iteration   5 | Best Score: 1.6657
+2026-01-25 04:11:53,761 | INFO     |     Iteration  10 | Best Score: 1.6850
+2026-01-25 04:11:53,766 | INFO     |     Iteration  15 | Best Score: 1.7238
+2026-01-25 04:11:53,769 | INFO     |     Iteration  20 | Best Score: 1.7238
+2026-01-25 04:11:53,769 | INFO     |    Optimization complete | Final Score: 1.8045
+2026-01-25 04:11:53,960 | INFO     |    Ablation chart saved: urban_output\ablation_study.png
+2026-01-25 04:11:53,960 | INFO     | ================================================================================
+2026-01-25 04:11:53,960 | INFO     | PHASE 9.5: SENSITIVITY ANALYSIS
+2026-01-25 04:11:53,960 | INFO     | ================================================================================
+2026-01-25 04:11:53,960 | INFO     |   Testing Scenario: Accessibility-First...
+2026-01-25 04:11:53,960 | INFO     | ================================================================================
+2026-01-25 04:11:53,960 | INFO     | PHASE 5: OPTIMIZATION WITH ZONING CONSTRAINTS
+2026-01-25 04:11:53,960 | INFO     | ================================================================================
+2026-01-25 04:11:53,971 | INFO     |    Valid candidates: 274 / 1141 (24.0%)
+2026-01-25 04:11:53,971 | INFO     |   Initializing Particle Swarm Optimization...
+2026-01-25 04:11:53,971 | INFO     |     Iteration   0 | Best Score: 1.6197
+2026-01-25 04:11:53,976 | INFO     |     Iteration   5 | Best Score: 1.9196
+2026-01-25 04:11:53,976 | INFO     |     Iteration  10 | Best Score: 2.1152
+2026-01-25 04:11:53,981 | INFO     |     Iteration  15 | Best Score: 2.2587
+2026-01-25 04:11:53,981 | INFO     |     Iteration  20 | Best Score: 2.2587
+2026-01-25 04:11:53,986 | INFO     |    Optimization complete | Final Score: 2.2587
+2026-01-25 04:11:53,986 | INFO     |   Testing Scenario: Population-First...
+2026-01-25 04:11:53,986 | INFO     | ================================================================================
+2026-01-25 04:11:53,986 | INFO     | PHASE 5: OPTIMIZATION WITH ZONING CONSTRAINTS
+2026-01-25 04:11:53,986 | INFO     | ================================================================================
+2026-01-25 04:11:53,996 | INFO     |    Valid candidates: 800 / 1141 (70.1%)
+2026-01-25 04:11:53,996 | INFO     |   Initializing Particle Swarm Optimization...
+2026-01-25 04:11:53,996 | INFO     |     Iteration   0 | Best Score: 1.8288
+2026-01-25 04:11:53,996 | INFO     |     Iteration   5 | Best Score: 1.8607
+2026-01-25 04:11:54,001 | INFO     |     Iteration  10 | Best Score: 1.8607
+2026-01-25 04:11:54,001 | INFO     |     Iteration  15 | Best Score: 1.9357
+2026-01-25 04:11:54,008 | INFO     |     Iteration  20 | Best Score: 1.9357
+2026-01-25 04:11:54,008 | INFO     |    Optimization complete | Final Score: 2.0049
+2026-01-25 04:11:54,008 | INFO     |   Testing Scenario: Balanced...
+2026-01-25 04:11:54,008 | INFO     | ================================================================================
+2026-01-25 04:11:54,008 | INFO     | PHASE 5: OPTIMIZATION WITH ZONING CONSTRAINTS
+2026-01-25 04:11:54,008 | INFO     | ================================================================================
+2026-01-25 04:11:54,021 | INFO     |    Valid candidates: 838 / 1141 (73.4%)
+2026-01-25 04:11:54,021 | INFO     |   Initializing Particle Swarm Optimization...
+2026-01-25 04:11:54,021 | INFO     |     Iteration   0 | Best Score: 1.7836
+2026-01-25 04:11:54,024 | INFO     |     Iteration   5 | Best Score: 1.9373
+2026-01-25 04:11:54,026 | INFO     |     Iteration  10 | Best Score: 1.9373
+2026-01-25 04:11:54,026 | INFO     |     Iteration  15 | Best Score: 1.9670
+2026-01-25 04:11:54,031 | INFO     |     Iteration  20 | Best Score: 1.9896
+2026-01-25 04:11:54,031 | INFO     |    Optimization complete | Final Score: 1.9896
+2026-01-25 04:11:54,031 | INFO     |   Testing Scenario: Equity-First...
+2026-01-25 04:11:54,031 | INFO     | ================================================================================
+2026-01-25 04:11:54,031 | INFO     | PHASE 5: OPTIMIZATION WITH ZONING CONSTRAINTS
+2026-01-25 04:11:54,031 | INFO     | ================================================================================
+2026-01-25 04:11:54,043 | INFO     |    Valid candidates: 839 / 1141 (73.5%)
+2026-01-25 04:11:54,043 | INFO     |   Initializing Particle Swarm Optimization...
+2026-01-25 04:11:54,043 | INFO     |     Iteration   0 | Best Score: 1.8312
+2026-01-25 04:11:54,046 | INFO     |     Iteration   5 | Best Score: 1.9116
+2026-01-25 04:11:54,046 | INFO     |     Iteration  10 | Best Score: 1.9116
+2026-01-25 04:11:54,051 | INFO     |     Iteration  15 | Best Score: 1.9116
+2026-01-25 04:11:54,051 | INFO     |     Iteration  20 | Best Score: 1.9116
+2026-01-25 04:11:54,056 | INFO     |    Optimization complete | Final Score: 1.9333
+2026-01-25 04:11:54,286 | INFO     |    Sensitivity heatmap saved: urban_output\sensitivity_analysis.png
+2026-01-25 04:11:54,286 | INFO     |    Robustness Check: 0 sites appeared in ALL 4 scenarios
+2026-01-25 04:11:54,291 | INFO     | Execution Complete
+2026-01-25 04:11:54,291 | INFO     | Executive summary generated: urban_output\EXECUTIVE_SUMMARY.txt

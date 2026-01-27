@@ -1,0 +1,28 @@
+2026-01-19 13:45:30,430 | INFO | init_code | >>> [PHASE 1] DATA INGESTION INITIALIZED
+2026-01-19 13:45:30,430 | INFO | init_code | Downloading vector graph for: Casbah, Algiers, Algeria
+2026-01-19 13:45:31,529 | INFO | init_code | Downloading building footprint geometries...
+2026-01-19 13:45:31,801 | INFO | init_code | Downloading existing healthcare infrastructure...
+2026-01-19 13:45:32,163 | INFO | init_code | Querying Open-Elevation API (Digital Elevation Model)...
+2026-01-19 13:45:36,166 | WARNING | init_code | Elevation API batch failed: HTTPSConnectionPool(host='api.open-elevation.com', port=443): Max retries exceeded with url: /api/v1/lookup (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000001BC762E0C70>, 'Connection to api.open-elevation.com timed out. (connect timeout=4)'))
+2026-01-19 13:45:44,979 | WARNING | init_code | Elevation API batch failed: HTTPSConnectionPool(host='api.open-elevation.com', port=443): Read timed out. (read timeout=4)
+2026-01-19 13:45:50,877 | INFO | init_code | Topography enriched for 1021 nodes.
+2026-01-19 13:45:50,877 | INFO | init_code | Data Pipeline Complete. Nodes: 1141, Bldgs: 2251
+2026-01-19 13:45:50,877 | INFO | init_code | >>> [PHASE 2] PHYSICS ENGINE: CALCULATING IMPEDANCE
+2026-01-19 13:45:50,889 | INFO | init_code | Physics model applied to 3310 road segments.
+2026-01-19 13:45:50,899 | INFO | init_code | >>> [PHASE 3] ECONOMETRICS: DEMAND MAPPING
+2026-01-19 13:45:50,935 | INFO | init_code | Mapped 658830 sqm of demand to network.
+2026-01-19 13:45:50,939 | INFO | init_code | Calculating 2SFCA Accessibility Scores...
+2026-01-19 13:46:13,187 | INFO | init_code | >>> [PHASE 4] FEATURE ENGINEERING
+2026-01-19 13:46:13,200 | INFO | init_code | >>> [PHASE 5] ML TRAINING: STACKING ENSEMBLE
+2026-01-19 13:46:13,200 | INFO | init_code | Fitting Stacking Regressor...
+2026-01-19 13:46:16,001 | INFO | init_code | Model Performance -> R2: -0.0014 | MAE: 0.0000
+2026-01-19 13:46:16,001 | INFO | init_code | >>> [PHASE 6] OPTIMIZATION: APPLYING ZONING CONSTRAINTS
+2026-01-19 13:46:16,009 | INFO | init_code | Constraint Filter: 1134/1141 nodes are buildable.
+2026-01-19 13:46:16,011 | INFO | init_code | Initializing Particle Swarm Optimization...
+2026-01-19 13:46:16,126 | INFO | init_code |    PSO Iteration 0: Max Coverage = 600133 sqm
+2026-01-19 13:46:16,480 | INFO | init_code |    PSO Iteration 5: Max Coverage = 600464 sqm
+2026-01-19 13:46:16,824 | INFO | init_code |    PSO Iteration 10: Max Coverage = 600464 sqm
+2026-01-19 13:46:17,207 | INFO | init_code |    PSO Iteration 15: Max Coverage = 601871 sqm
+2026-01-19 13:46:17,501 | INFO | init_code | >>> [PHASE 7] DECISION SUPPORT: CLASSIFICATION & JUSTIFICATION
+2026-01-19 13:46:17,511 | INFO | init_code | Generating dashboard: algiers_master_plan.html
+2026-01-19 13:46:17,525 | INFO | init_code | Dashboard export successful.
