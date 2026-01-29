@@ -5,41 +5,41 @@ import warnings
 import numpy as np
 import pandas as pd
 
-# ✅ MINDSPORE STACK (100% conforme Huawei)
+ 
 import mindspore as ms
 from mindspore import nn, ops, Tensor, save_checkpoint
 from mindspore.train import Model, LossMonitor, TimeMonitor
 from mindspore.dataset import GeneratorDataset, NumpySlicesDataset
 from mindspore.nn import Adam, MSELoss
 
-# 🔧 IMPORT SÉCURISÉ DE MINDSPORE_GL
+ 
 try:
     from mindspore_gl import Graph as MSGLGraph, GNNCell
     from mindspore_gl.nn import GATConv
     MSGL_AVAILABLE = True
-    logging.info("✅ MindSpore Graph Learning available")
+    logging.info(" MindSpore Graph Learning available")
 except (ImportError, ModuleNotFoundError) as e:
     MSGL_AVAILABLE = False
-    logging.warning(f"⚠️  MindSpore Graph Learning unavailable: {e}. Will fallback to MLP on CPU.")
+    logging.warning(f"  MindSpore Graph Learning unavailable: {e}. Will fallback to MLP on CPU.")
 
 from sklearn.preprocessing import RobustScaler
 from config import CONFIG
 
-# 🔧 DÉTECTION HARDWARE SANS ERREURS
+
 def _detect_hardware():
     """Détection Ascend → CPU fallback silencieuse"""
     try:
         ms.set_device("Ascend")
         ms.set_context(mode=ms.GRAPH_MODE, max_call_depth=10000)
         if ms.get_context("device_target") == "Ascend":
-            print("✅ [HARDWARE] Ascend NPU activated")
+            print(" [HARDWARE] Ascend NPU activated")
             return "Ascend", ms.GRAPH_MODE, True
     except (RuntimeError, ValueError):
         pass
     
     ms.set_device("CPU")
     ms.set_context(mode=ms.PYNATIVE_MODE)
-    print("💻 [HARDWARE] CPU fallback activated (PYNATIVE_MODE)")
+    print(" [HARDWARE] CPU fallback activated (PYNATIVE_MODE)")
     return "CPU", ms.PYNATIVE_MODE, False
 
 DEVICE_TARGET, CONTEXT_MODE, DATASET_SINK = _detect_hardware()
@@ -56,7 +56,7 @@ logging.basicConfig(
 warnings.filterwarnings('ignore')
 
 
-# 🔧 DÉFINITION CORRECTE DU GNN (signature MSGL obligatoire)
+
 if MSGL_AVAILABLE:
     class UrbanGNN(GNNCell):
         """
@@ -85,7 +85,7 @@ if MSGL_AVAILABLE:
                 nn.Dense(32, 1)
             ])
         
-        # ⚠️ SIGNATURE OBLIGATOIRE POUR MSGL
+        # SIGNATURE OBLIGATOIRE POUR MSGL
         def construct(self, x, g: MSGLGraph):
             x = self.gat1(x, g)
             x = ops.relu(x)
@@ -115,15 +115,7 @@ else:
 
 
 class ExplainableMLCore:
-    """
-    Moteur ML 100% MindSpore avec GNN (signature MSGL corrigée).
     
-    CORRECTIONS CRITIQUES :
-      ✅ Signature construct(self, x, g: Graph) conforme MSGL
-      ✅ Création objet Graph MSGL dans _osmnx_to_mindspore_graph
-      ✅ Alignement robuste X/y index
-      ✅ Fallback silencieux MLP si MSGL échoue sur CPU
-    """
     def __init__(self, graph=None):
         self.graph = graph
         self.model = None
@@ -145,11 +137,11 @@ class ExplainableMLCore:
         if G is None:
             raise ValueError("Graphe OSMnx requis")
         
-        # 🔧 CORRECTION INDEX : Alignement X/y
+       
         if not isinstance(y_series, pd.Series):
             y_series = pd.Series(y_series)
         if not y_series.index.equals(X_df.index):
-            logging.warning(f"  ⚠️  Index mismatch - reindexing y to match X.index")
+            logging.warning(f"    Index mismatch - reindexing y to match X.index")
             y_series = y_series.reindex(X_df.index, fill_value=0.0)
         
         # Préprocessing
@@ -157,7 +149,7 @@ class ExplainableMLCore:
         y = y_series.fillna(0).astype(np.float32)
         X_scaled = self.scaler.fit_transform(X).astype(np.float32)
         
-        # 🔧 CORRECTION MSGL : Conversion graphe + création objet Graph
+     
         logging.info("  Converting OSMnx graph to MindSpore GL format...")
         edge_index, node_feat, node_ids, num_nodes = self._osmnx_to_mindspore_graph(G, X_scaled, X_df.index)
         
@@ -166,14 +158,14 @@ class ExplainableMLCore:
         labels = Tensor(y_aligned.values.reshape(-1, 1), ms.float32)
         node_feat_tensor = Tensor(node_feat, ms.float32)
         
-        # 🔧 CRÉATION OBJET GRAPH MSGL (obligatoire pour GNNCell)
+
         if self.use_gnn:
             try:
                 edge_index_ms = Tensor(edge_index, ms.int32)
                 g = MSGLGraph(edge_index_ms, None, num_nodes)
                 logging.info(f"  Created MSGL Graph | Nodes: {num_nodes} | Edges: {edge_index.shape[1]}")
             except Exception as e:
-                logging.warning(f"  ⚠️  MSGL Graph creation failed: {e}. Falling back to MLP.")
+                logging.warning(f"    MSGL Graph creation failed: {e}. Falling back to MLP.")
                 self.use_gnn = False
                 g = None
         else:
@@ -278,7 +270,7 @@ class ExplainableMLCore:
         edge_index = np.array(edges).T if edges else np.zeros((2, 0), dtype=np.int32)
         
         if edge_index.shape[1] == 0:
-            logging.warning("  ⚠️  No valid edges - creating minimal graph")
+            logging.warning("   No valid edges - creating minimal graph")
             edge_index = np.array([[0, 1], [1, 0]], dtype=np.int32)
         
         return edge_index, node_features, node_ids, len(node_ids)  # ← num_nodes ajouté
@@ -373,4 +365,5 @@ class ExplainableMLCore:
         
         imp_path = os.path.join(CONFIG["OUTPUT_DIR"], "feature_importance.csv")
         self.feature_importance.to_csv(imp_path, index=False)
+
         logging.info(f"  Feature importance saved to: {imp_path}")
