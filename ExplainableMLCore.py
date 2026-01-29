@@ -5,19 +5,19 @@ import warnings
 import numpy as np
 import pandas as pd
 
-# ✅ MINDSPORE STACK (100% conforme Huawei - détection hardware automatique)
+
 import mindspore as ms
 from mindspore import nn, ops, Tensor, save_checkpoint
 from mindspore.train import Model, LossMonitor, TimeMonitor
 from mindspore.dataset import NumpySlicesDataset
 from mindspore.nn import Adam, MSELoss
 
-# ✅ Préprocessing autorisé (conforme Huawei ModelArts Best Practices)
+
 from sklearn.preprocessing import RobustScaler
 
 from config import CONFIG
 
-# 🔧 DÉTECTION AUTOMATIQUE HARDWARE (CPU ↔ Ascend) - AJOUT MINIMAL
+
 def _auto_configure_hardware():
     """
     Configure MindSpore pour Ascend si disponible, sinon CPU fallback.
@@ -32,7 +32,7 @@ def _auto_configure_hardware():
         ms.set_device("Ascend")
         ms.set_context(mode=ms.GRAPH_MODE, max_call_depth=10000)
         if ms.get_context("device_target") == "Ascend":
-            print("✅ [HARDWARE] Ascend NPU detected - using GRAPH_MODE + dataset_sink")
+            print(" [HARDWARE] Ascend NPU detected - using GRAPH_MODE + dataset_sink")
             return "Ascend", True
     except (RuntimeError, ValueError):
         pass  # Silencieux - fallback CPU
@@ -40,7 +40,7 @@ def _auto_configure_hardware():
     # Fallback CPU (garanti fonctionnel)
     ms.set_device("CPU")
     ms.set_context(mode=ms.PYNATIVE_MODE)
-    print("💻 [HARDWARE] CPU detected - using PYNATIVE_MODE (no dataset_sink)")
+    print(" [HARDWARE] CPU detected - using PYNATIVE_MODE (no dataset_sink)")
     
     # Restaurer GLOG_v original si existant
     if original_glog is not None:
@@ -50,7 +50,7 @@ def _auto_configure_hardware():
     
     return "CPU", False
 
-# ⚙️ CONFIGURATION HARDWARE AVANT TOUTE AUTRE INITIALISATION
+
 DEVICE_TARGET, USE_DATASET_SINK = _auto_configure_hardware()
 
 # Création dossiers de sortie
@@ -94,13 +94,7 @@ class TabularMLP(nn.Cell):
 
 
 class ExplainableMLCore:
-    """
-    Moteur ML 100% MindSpore avec détection hardware automatique.
-    
-    ✅ VOTRE ARCHITECTURE MLP PRÉSERVÉE À 100%
-    ✅ Détection transparente : CPU local → Ascend ModelArts
-    ✅ Zéro modification métier - seulement configuration MindSpore adaptative
-    """
+   
     def __init__(self, graph=None):
         self.graph = graph  # Non utilisé par MLP (conservé pour compatibilité API)
         self.model = None
@@ -147,7 +141,7 @@ class ExplainableMLCore:
             epoch=100,
             train_dataset=dataset,
             callbacks=[LossMonitor(per_print_times=20), TimeMonitor(data_size=64)],
-            dataset_sink_mode=USE_DATASET_SINK  # ✅ Auto: True=Ascend, False=CPU
+            dataset_sink_mode=USE_DATASET_SINK 
         )
         
         # Évaluation (inchangé)
